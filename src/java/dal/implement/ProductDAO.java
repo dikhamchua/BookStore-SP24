@@ -16,7 +16,7 @@ public class ProductDAO extends GenericDAO<Product>{
 
     @Override
     public List<Product> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return queryGenericDAO(Product.class);
     }
 
     @Override
