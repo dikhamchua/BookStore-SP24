@@ -59,7 +59,7 @@
                 <!-- mobile-menu-area-start -->
             <jsp:include page="../common/mobile-menu-area.jsp"></jsp:include>
                 <!-- mobile-menu-area-end -->
-        </header>
+            </header>
             <!-- header-area-end -->
             <!-- breadcrumbs-area-start -->
         <jsp:include page="../common/breadcrumbs-area.jsp"></jsp:include>
@@ -80,7 +80,7 @@
                                     <ul>
                                     <c:forEach items="${listCategory}" var="cate">
                                         <li><a href="home?search=category&categoryId=${cate.id}">${cate.name}<span>(15)</span></a></li>
-                                    </c:forEach>
+                                        </c:forEach>
                                 </ul>
                             </div>
                             <div class="left-title mb-20">
@@ -375,10 +375,12 @@
                             </div>
                             <div class="page-number">
                                 <ul>
-                                    <li><a href="#" class="active">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
+                                    <c:forEach begin="1" end="${pageControl.totalPage}" var="pageNumber">
+                                        <!--<li><a href="#" class="active">1</a></li>-->
+                                        <li class="${pageNumber == pageControl.page ? 'active' : ''}">
+                                            <a href="${pageControl.urlPattern}page=${pageNumber}">${pageNumber}</a>
+                                        </li>
+                                    </c:forEach>
                                     <li><a href="#" class="angle"><i class="fa fa-angle-right"></i></a></li>
                                 </ul>
                             </div>
