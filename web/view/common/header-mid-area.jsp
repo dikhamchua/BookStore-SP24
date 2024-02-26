@@ -8,9 +8,10 @@
         <div class="row">
             <div class="col-lg-3 col-md-5 col-12">
                 <div class="header-search">
-                    <form action="#">
-                        <input type="text" placeholder="Search entire store here..." />
-                        <a href="#"><i class="fa fa-search"></i></a>
+                    <form action="home" method="GET">
+                        <input type="hidden" name="search" value="searchByName"/>
+                        <input type="text" placeholder="Search entire store here..." name="keyword" />
+                        <a href="#" onclick="return this.closest('form').submit()"><i class="fa fa-search"></i></a>
                     </form>
                 </div>
             </div>

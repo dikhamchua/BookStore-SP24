@@ -53,6 +53,10 @@ public class HomeController extends HttpServlet {
                 String categoryId = request.getParameter("categoryId");
                 listProduct = productDAO.findByCategory(categoryId);
                 break;
+            case "searchByName":
+                String keyword = request.getParameter("keyword");
+                listProduct = productDAO.findByName(keyword);
+                break;
             default:
                 listProduct = productDAO.findAll();
         }
