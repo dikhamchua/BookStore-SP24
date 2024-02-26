@@ -79,7 +79,7 @@
                                 <div class="left-menu mb-30">
                                     <ul>
                                     <c:forEach items="${listCategory}" var="cate">
-                                        <li><a href="#">${cate.name}<span>(15)</span></a></li>
+                                        <li><a href="home?search=category&categoryId=${cate.id}">${cate.name}<span>(15)</span></a></li>
                                     </c:forEach>
                                 </ul>
                             </div>

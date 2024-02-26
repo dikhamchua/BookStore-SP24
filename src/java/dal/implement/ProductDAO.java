@@ -43,4 +43,13 @@ public class ProductDAO extends GenericDAO<Product> {
         return list.isEmpty() ? null : list.get(0);
     }
 
+    public List<Product> findByCategory(String categoryId) {
+        String sql = "SELECT *\n"
+                + "  FROM [Product]\n"
+                + "  where categoryId = ?";
+        parameterMap = new LinkedHashMap<>();
+        parameterMap.put("categoryId", categoryId);
+        return queryGenericDAO(Product.class, sql, parameterMap);
+    }
+
 }
