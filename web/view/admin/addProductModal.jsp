@@ -15,7 +15,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="addProductForm" action="#" method="POST" enctype="multipart/form-data">
+                <form id="addProductForm" action="product?action=add" method="POST" enctype="multipart/form-data">
                     <!--Name-->
                     <div class="form-group">
                         <label for="name">Name:</label>
@@ -39,7 +39,9 @@
                         <label for="category">Category: </label>
                         <div class="input-group">
                             <select class="custom-select" id="category" name="category">
-                                
+                                <c:forEach items="${listCategory}" var="c">
+                                    <option value="${c.id}">${c.name}</option>
+                                </c:forEach>
                             </select>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">Category</button>
