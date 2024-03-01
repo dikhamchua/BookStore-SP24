@@ -83,22 +83,27 @@
                                         <c:forEach items="${listProduct}" var="p">
                                             <tr>
                                                 <td name="id">${p.id}</td>
-                                                <td>${p.name}</td>
-                                                <td>
+                                                <td name="name">${p.name}</td>
+                                                <td name="image">
                                                     <img src="${p.image}" width="100" height="100" alt="alt"/>
                                                 </td>
-                                                <td>${p.quantity}</td>
-                                                <td>${p.price}$</td>
-                                                <td>
+                                                <td name="quantity">${p.quantity}</td>
+                                                <td name="price">${p.price}$</td>
+                                                <td name="category">
                                                     <c:forEach items="${listCategory}" var="c">
                                                         <c:if test="${c.id == p.categoryId}">
                                                             ${c.name}
                                                         </c:if>
                                                     </c:forEach>
                                                 </td>
-                                                <td>${p.description}</td>
+                                                <td name="description">${p.description}</td>
                                                 <td>
-                                                    <button type="button" class="btn btn-primary">Edit</button>
+                                                    <button type="button" class="btn btn-primary"
+                                                            data-toggle="modal" 
+                                                            data-target="#editProductModal"
+                                                            onclick="editProductModal(this)">
+                                                        Edit
+                                                    </button>
                                                     <button type="button" class="btn btn-danger" 
                                                             data-toggle="modal" data-target="#delete-product-modal"
                                                             onclick="deleteProductModal(${p.id})">
@@ -136,6 +141,7 @@
         
         <jsp:include page="addProductModal.jsp"></jsp:include>
         <jsp:include page="deleteProductModal.jsp"></jsp:include>
+        <jsp:include page="editProductModal.jsp"></jsp:include>
 
             <!-- Bootstrap core JavaScript-->
             <script src="${pageContext.request.contextPath}/vendor-admin/jquery/jquery.min.js"></script>
