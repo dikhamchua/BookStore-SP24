@@ -76,12 +76,13 @@
                                                 <th>Price</th>
                                                 <th>Category</th>
                                                 <th>Description</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         <c:forEach items="${listProduct}" var="p">
                                             <tr>
-                                                <td>${p.id}</td>
+                                                <td name="id">${p.id}</td>
                                                 <td>${p.name}</td>
                                                 <td>
                                                     <img src="${p.image}" width="100" height="100" alt="alt"/>
@@ -96,6 +97,14 @@
                                                     </c:forEach>
                                                 </td>
                                                 <td>${p.description}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary">Edit</button>
+                                                    <button type="button" class="btn btn-danger" 
+                                                            data-toggle="modal" data-target="#delete-product-modal"
+                                                            onclick="deleteProductModal(${p.id})">
+                                                        Delete
+                                                    </button>
+                                                </td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -126,6 +135,7 @@
         <jsp:include page="../common/admin/logoutModal.jsp"></jsp:include>
         
         <jsp:include page="addProductModal.jsp"></jsp:include>
+        <jsp:include page="deleteProductModal.jsp"></jsp:include>
 
             <!-- Bootstrap core JavaScript-->
             <script src="${pageContext.request.contextPath}/vendor-admin/jquery/jquery.min.js"></script>

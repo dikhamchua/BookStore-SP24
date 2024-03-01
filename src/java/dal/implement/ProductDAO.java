@@ -110,4 +110,12 @@ public class ProductDAO extends GenericDAO<Product> {
 
     }
 
+    public void deleteById(int id) {
+        String sql = "DELETE FROM [dbo].[Product]\n"
+                + "      WHERE [id] = ?";
+        parameterMap = new LinkedHashMap<>();
+        parameterMap.put("id", id);
+        deleteGenericDAO(sql, parameterMap);
+    }
+
 }
