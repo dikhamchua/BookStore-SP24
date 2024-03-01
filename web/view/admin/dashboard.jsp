@@ -27,6 +27,12 @@
         <link href="${pageContext.request.contextPath}/css/sb-admin.css" rel="stylesheet">
 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/colReorder-bootstrap4.css">
+        
+        <style>
+            .error{
+                color:red;
+            }
+        </style>
 
     </head>
 
@@ -118,6 +124,8 @@
 
             <!-- Logout Modal-->
         <jsp:include page="../common/admin/logoutModal.jsp"></jsp:include>
+        
+        <jsp:include page="addProductModal.jsp"></jsp:include>
 
             <!-- Bootstrap core JavaScript-->
             <script src="${pageContext.request.contextPath}/vendor-admin/jquery/jquery.min.js"></script>
