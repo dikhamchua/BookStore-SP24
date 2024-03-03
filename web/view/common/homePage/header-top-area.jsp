@@ -42,6 +42,9 @@
                             <li>
                                 <a href="authen?action=login">Sign in</a>
                             </li>
+                            <li>
+                                <a href="authen?action=sign-up">Sign up</a>
+                            </li>
                         </c:if>
                         <c:if test="${account != null}">
                             <li>
