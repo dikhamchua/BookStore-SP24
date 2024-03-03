@@ -16,6 +16,10 @@
         <servlet-name>ProductAdminServlet</servlet-name>
         <servlet-class>controller.admin.ProductAdminServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AuthenticationController</servlet-name>
+        <servlet-class>controller.authen.AuthenticationController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -34,6 +38,10 @@
     <servlet-mapping>
         <servlet-name>ProductAdminServlet</servlet-name>
         <url-pattern>/admin/product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuthenticationController</servlet-name>
+        <url-pattern>/authen</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
