@@ -81,16 +81,20 @@
                     <div class="offset-lg-2 col-lg-8 col-md-12 col-12">
                         <div class="billing-fields">
                             <div class="single-register">
-                                <form action="authen?action=sign-up" method="POST">
+                                <form action="authen?action=sign-up" method="POST" id="signUpForm">
                                     <label>Account password<span>*</span></label>
-                                    <input type="text" placeholder="Username" />
+                                    <input type="text" placeholder="Username" name="username"/>
                                     <br/>
                                     <label>Password<span>*</span></label>
-                                    <input type="password" placeholder="Password" />
+                                    <input type="password" placeholder="Password" name="password" />
+                                    <br/>
+                                    <span style="color:red">${error}</span>
                                 </form>
                             </div>
+                            
                             <div class="single-register">
-                                <a href="#">Register</a>
+                                <a href="#"
+                                   onclick="document.querySelector('#signUpForm').submit()">Register</a>
                             </div>
                         </div>
                     </div>
