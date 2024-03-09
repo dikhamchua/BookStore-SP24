@@ -170,7 +170,9 @@
                                 </tbody>
                             </table>
                             <div class="wc-proceed-to-checkout">
-                                <a href="#">Proceed to Checkout</a>
+                                <form action="payment?action=check-out" method="POST">
+                                    <a href="#" onclick="return this.closest('form').submit();">Proceed to Checkout</a>
+                                </form>
                             </div>
                         </div>
                     </div>

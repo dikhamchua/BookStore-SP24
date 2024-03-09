@@ -4,10 +4,19 @@
  */
 package controller.user;
 
+import constant.CommonConst;
+import dal.implement.OrderDAO;
+import dal.implement.OrderDetailsDAO;
+import entity.Account;
 import entity.Order;
 import entity.OrderDetails;
+import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +46,9 @@ public class PaymentController extends HttpServlet {
                 break;
             case "delete":
                 delete(request, response);
+                break;
+            case "check-out":
+                checkOut(request, response);
                 break;
             default:
                 throw new AssertionError();
@@ -114,4 +126,49 @@ public class PaymentController extends HttpServlet {
         session.setAttribute("cart", cart);
     }
 
+    private void checkOut(HttpServletRequest request, HttpServletResponse response) {
+        //lay ve cart
+        HttpSession session = request.getSession();
+        Order cart = (Order) session.getAttribute("cart");
+        //lay ve account id
+        int accountId = ( (Account) session.getAttribute(CommonConst.SESSION_ACCOUNT)).getId();
+        List<Product> list = (List<Product>) session.getAttribute(CommonConst.SESSION_PRODUCT);
+        //amount
+        int amount = calculateAmount(cart, list);
+        //insert order 
+        //set information
+        cart.setAccountId(accountId);
+        cart.setAmount(amount);
+        cart.setCreateAt(Timestamp.valueOf(LocalDateTime.now()));
+        //get list product
+        
+        OrderDAO orderDAO = new OrderDAO();
+        OrderDetailsDAO odDAO = new OrderDetailsDAO();
+        int orderId = orderDAO.insert(cart);
+        for (OrderDetails obj : cart.getListOrderDetails()) {
+            obj.setOrderId(orderId);
+            odDAO.insert(obj);
+        }
+        //tru di so luong san pham o trong co so du lieu
+        
+        //remove
+        session.removeAttribute("cart");
+    }
+
+    private int calculateAmount(Order cart, List<Product> list) {
+        int amount = 0;
+        for (OrderDetails od : cart.getListOrderDetails()) {
+            amount += (od.getQuantity() * findPriceById(list, od.getProductId()));
+        }
+        return amount;
+    }
+    
+    private float findPriceById(List<Product> list, int bookId) {
+        for (Product obj : list) {
+            if (obj.getId() == bookId) {
+                return obj.getPrice();
+            }
+        }
+        return 0;
+    }
 }

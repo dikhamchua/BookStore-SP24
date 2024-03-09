@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -231,6 +232,8 @@ public abstract class GenericDAO<T> extends DBContext {
             return rs.getBoolean(fieldName);
         } else if (fieldType == float.class || fieldType == Float.class) {
             return rs.getFloat(fieldName);
+        } else if ( fieldType == Timestamp.class) {
+            return rs.getTimestamp(fieldName);
         } else {
             return rs.getObject(fieldName);
         }
