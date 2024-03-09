@@ -115,7 +115,12 @@
                                                 </form>
                                             </td>
                                             <td class="product-subtotal">${p.price * od.quantity}</td>
-                                            <td class="product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
+                                            <td class="product-remove">
+                                                <form action="payment?action=delete" method="POST">
+                                                    <input type="hidden" name="id" value="${p.id}"/>
+                                                    <a href="#" onclick="return this.closest('form').submit()"><i class="fa fa-times"></i></a>
+                                                </form>
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -209,18 +214,18 @@
         <script src="${pageContext.request.contextPath}/js/main.js"></script>
 
         <script>
-                                                                       window.onload = updateSubTotal();
+                                                        window.onload = updateSubTotal();
 
-                                                                       function updateSubTotal() {
-                                                                           let totalPriceOfEachProduct = document.querySelectorAll('td.product-subtotal');
-                                                                           let totalCart = 0;
-                                                                           totalPriceOfEachProduct.forEach(e => {
-                                                                               let totalPrice = parseFloat(e.textContent.trim());
-                                                                               totalCart += totalPrice;
-                                                                           });
-                                                                           document.querySelector('#subtotal').innerHTML = totalCart + "$";
-                                                                           document.querySelector('#totalCart').innerHTML = totalCart + "$";
-                                                                       }
+                                                        function updateSubTotal() {
+                                                            let totalPriceOfEachProduct = document.querySelectorAll('td.product-subtotal');
+                                                            let totalCart = 0;
+                                                            totalPriceOfEachProduct.forEach(e => {
+                                                                let totalPrice = parseFloat(e.textContent.trim());
+                                                                totalCart += totalPrice;
+                                                            });
+                                                            document.querySelector('#subtotal').innerHTML = totalCart + "$";
+                                                            document.querySelector('#totalCart').innerHTML = totalCart + "$";
+                                                        }
         </script>
     </body>
 
