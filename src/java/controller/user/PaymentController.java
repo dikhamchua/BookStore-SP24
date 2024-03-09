@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller.user;
 
 import entity.Order;
@@ -16,17 +15,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class PaymentController extends HttpServlet {
-   
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         request.getRequestDispatcher("view/user/payment/cart.jsp").forward(request, response);
-    } 
-
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         String action = request.getParameter("action") == null
                 ? ""
                 : request.getParameter("action");
@@ -34,9 +32,13 @@ public class PaymentController extends HttpServlet {
             case "add-product":
                 addProduct(request, response);
                 break;
+            case "change-quantity":
+                changeQuantity(request, response);
+                break;
             default:
                 throw new AssertionError();
         }
+        response.sendRedirect("payment");
     }
 
     private void addProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -54,12 +56,11 @@ public class PaymentController extends HttpServlet {
         OrderDetails od = new OrderDetails();
         od.setProductId(id);
         od.setQuantity(quantity);
-        
+
         //them orderdetails vao trong cart
         addOrderDetailsToOrder(od, cart);
         //set cart moi len session
         session.setAttribute("cart", cart);
-        response.sendRedirect("payment");
     }
 
     private void addOrderDetailsToOrder(OrderDetails od, Order cart) {
@@ -75,6 +76,25 @@ public class PaymentController extends HttpServlet {
         }
     }
 
-   
+    private void changeQuantity(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        try {
+            //get ve product id
+            int id = Integer.parseInt(request.getParameter("id"));
+            //get ve quantity
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            //lay ve cart
+            Order cart = (Order) session.getAttribute("cart");
+            //thay doi quantity
+            for (OrderDetails obj : cart.getListOrderDetails()) {
+                if (obj.getProductId() == id) {
+                    obj.setQuantity(quantity);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }
