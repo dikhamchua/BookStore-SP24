@@ -33,9 +33,18 @@
                 <div class="account-area text-end">
                     <ul>
                         <c:if test="${account != null}">
-                            <li>
-                                <a href="my-account.html">My Account</a>
-                            </li>
+                            <!--Nguoi dung-->
+                            <c:if test="${account.roleId == 2}">
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/dashboard">My Account</a>
+                                </li>
+                            </c:if>
+                            <!--Admin-->
+                            <c:if test="${account.roleId == 1}">
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/admin/dashboard">My Account</a>
+                                </li>
+                            </c:if>
                         </c:if>
                         <li><a href="checkout.html">Checkout</a></li>
                             <c:if test="${account == null}">
@@ -48,7 +57,7 @@
                         </c:if>
                         <c:if test="${account != null}">
                             <li>
-                                <a href="authen?action=log-out">Sign Out</a>
+                                <a href="${pageContext.request.contextPath}/authen?action=log-out">Sign Out</a>
                             </li>
                         </c:if>
                     </ul>

@@ -1,7 +1,3 @@
-<%-- 
-    Author     : 4USER-FPT
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="header-mid-area ptb-40">
     <div class="container">
